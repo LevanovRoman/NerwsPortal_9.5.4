@@ -1,0 +1,41 @@
+{% extends 'mainapp/base.html' %}
+{% load custom_filters %}
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'mainapp/css/post-page-style.css' %}">
+<style>
+ body {
+	background-image: url("{{ post.photo_big.url }}");
+	font-family: "Montserrat", "Helvetica", "Arial", sans-serif;
+    }
+  </style>
+{% endblock %}
+{% block main %}
+<main class="main-page">
+		<div class="container">
+		<h1 class="heading">{{ post.title|bad_words }}</h1>
+		</div>
+	</main>
+{% endblock main %}
+{% block content %}
+<section class="post-page">
+ 	<p class="post-content">{{ post.text|bad_words }}</p>
+</section>
+
+    <hr>
+<section class="post-page">
+ 	<p class="post-content">Автор: {{ post.author }}</p>
+ 	<p class="post-content">Тип: {{ post.get_type_display }}</p>
+ 	<p class="post-content">Категории:</p>
+		<ul>
+		{% for cat in  post.get_category_list %}
+			<li>{{ cat }}</li>
+		{% endfor %}
+		</ul>
+
+ 	<p class="post-content">Рейтинг: {{ post.rating }}</p>
+ 	<p class="post-content">Время создания: {{ post.time_created|date:"DATE_FORMAT" }}</p>
+</section>
+
+{% endblock %}

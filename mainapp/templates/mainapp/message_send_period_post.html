@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Новые посты!</h2>
+    <p>Привет, {{ name }}! </p>
+    <p>На нашем сайте в категории, на которую вы подписаны, за последнюю неделю появились новые посты:</p>
+    <ul>
+    {% for post in posts %}
+       <li>
+           Пост: {{ post.title|truncatewords:10 }} от автора {{ post.author }} {{ link }}/{{ post.slug }}/
+       </li>
+        <hr>
+        <br>
+    {% endfor %}
+    </ul>
+
+</body>
+</html>

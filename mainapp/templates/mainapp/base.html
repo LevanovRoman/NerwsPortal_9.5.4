@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'mainapp/css/home-style.css' %}">
+	{% block extrastyle %}
+	{% endblock %}
+</head>
+<body>
+    <header class="page-header">
+		<nav>
+			<ul class="menu">
+				{% for m in menu %}
+					<li><a href="{% url m.url_name %}">{{m.title}}</a></li>
+				{% endfor %}
+				{% if user.is_authenticated %}
+					<li><span>{{ user.username }}</span></li>
+					<li><a href="{% url 'account_logout' %}">Выйти</a></li>
+				{% else %}
+					<li><a href="{% url 'account_login' %}">Вход</a></li>
+					<li><a href="{% url 'account_signup' %}">Регистрация</a></li>
+				{% endif %}
+				{% if user.is_superuser or user.is_staff %}
+					<li><a href="{% url 'admin:index' %}">Админ</a></li>
+				{% endif %}
+			</ul>
+		</nav>
+	</header>
+	{% block main %}
+	<main class="main-page">
+		<div class="container">
+		<h1 class="heading">Портал новостей</h1>
+		<p>Всё <span>самое</span> свежее и интересное</p>
+		</div>
+	</main>
+	{% endblock main %}
+	{% block content %}
+	{% endblock %}
+</body>
+</html>

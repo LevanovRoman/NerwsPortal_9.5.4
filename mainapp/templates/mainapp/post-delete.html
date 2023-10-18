@@ -1,0 +1,11 @@
+{% extends 'mainapp/post-page.html' %}
+
+{% block content %}
+<h1>{{ type }}</h1>
+<hr>
+<form method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ object }}"?</p>
+    <input type="submit" value="Подтвердить">
+</form>
+{% endblock content %}
+

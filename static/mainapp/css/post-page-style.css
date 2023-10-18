@@ -1,0 +1,22 @@
+body {
+	background-image: url("../images/news_2.jpg");
+	font-family: "Montserrat", "Helvetica", "Arial", sans-serif;
+  font-size: 16px;
+  line-height: 32px;
+}
+.page-header{
+margin-bottom: 30px;
+}
+.heading {
+  margin: 0 0 24px;
+  font-size: 60px;
+  line-height: 96px;
+}
+.main-page  span {
+color: red;
+font-size: 55px;
+font-family: monospace;
+}
+.main-page{
+margin-bottom: 80px;
+}

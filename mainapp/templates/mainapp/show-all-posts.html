@@ -1,0 +1,92 @@
+{% extends 'mainapp/base.html' %}
+{% load custom_filters %}
+{% load news_tags %}
+{% load static %}
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'mainapp/css/show-all-posts-style.css' %}">
+{% endblock %}
+
+{% block main %}
+	<main class="main-page">
+		<div class="container">
+		<h1 class="heading">Все новости</h1>
+		<p>Всё <span>самое</span> свежее и интересное</p>
+		</div>
+	</main>
+	{% endblock main %}
+
+{% block content %}
+<div class="wanna_be">
+	{% if user.username in author_list %}
+		<p>Привет, <span>{{ user.username }}</span>! Ждём от тебя новых постов!</p>
+	{% else %}
+		<button> <a href="{% url 'upgrade' %}"> Хочу стать автором!</a> </button>
+	{% endif %}
+</div>
+<div class="temporary">
+ <div class="pagination">
+	{# Информация о предыдущих страницах #}
+   {% if page_obj.has_previous %}
+       {# Для каждой ссылки пагинации указываем обработку через новый тег #}
+       <a href="?{% url_replace page=1 %}">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
+
+   {{ page_obj.number }}
+
+   {% if page_obj.has_next %}
+       <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+   {% endif %}
+</div>
+</div>
+	<div>
+	<form action="" method="get">
+       {{ filterset.form.as_p }}
+       <input type="submit" value="Найти" />
+   </form>
+   <hr>
+</div>
+<div class="category_list">
+	{% show_all_cats %}
+</div>
+{% block category %}
+{% endblock %}
+	<div id="blog-posts" class="blog-cards">
+			{% for p in posts %}
+			<div class="blog-card-page 1">
+				<div class="blog-title-page"><p><a href="{{ p.get_absolute_url }}">{{ p.title|truncatewords:12|bad_words }}</a></p></div>
+				<div class="blog-date-page"><p>Автор: {{ p.author }}</p></div>
+				<div class="blog-date-page"><p>Тип: {{ p.get_type_display }}</p></div>
+				<div class="blog-date-page">
+					<p class="post-content">Категории:
+						<ul>
+							{% for cat in  p.get_category_list %}
+								<li>{{ cat }}</li>
+							{% endfor %}
+						</ul>
+					</p>
+				</div>
+				<div class="blog-date-page"><p>Текст: {{ p.text|truncatechars:20|bad_words }}</p></div>
+				<div class="blog-date-page"><p>Рейтинг: {{ p.rating }}</p></div>
+				<div class="blog-date-page"><p>Время создания: {{ p.time_created }}</p></div>
+				{% if is_author %}
+				<div><a href='{% url "update_post" slug=p.slug %}'> Редактировать пост</a></div>
+				<div><a href='{% url "delete_post" slug=p.slug %}'> Удалить пост</a></div>
+				{% endif %}
+			</div>
+		<hr>
+			{% endfor %}
+
+		</div>
+
+
+
+
+{% endblock content %}

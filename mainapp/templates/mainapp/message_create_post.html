@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Новый пост!</h2>
+    <p>На нашем сайте в категории, на которую вы подписаны, появился новый пост:</p>
+    <h3>{{ title|truncatechars:30 }} </h3>
+    <p>{{ text|truncatewords:10 }} </p>
+    <hr>
+    <br>
+    <p>ссылка: {{ link }}</p>
+</body>
+</html>

@@ -1,0 +1,115 @@
+body {
+	background-image: url("../images/news_2.jpg");
+	font-family: "Montserrat", "Helvetica", "Arial", sans-serif;
+  font-size: 16px;
+  line-height: 32px;
+}
+.page-header{
+margin-bottom: 30px;}
+.heading {
+  margin: 0 0 24px;
+  font-size: 60px;
+  line-height: 96px;
+}
+.main-page  span{
+color: red;
+font-size: 55px;
+font-family: monospace;}
+.main-page{
+margin-bottom: 80px;
+}
+.blog-page{
+	height: auto;
+	width: 800px;
+	margin: 0 auto;
+	margin-top: 600px;
+	margin-bottom: 100px;
+	padding: 0;
+	color: black;
+}
+.blog-menu {
+display: flex;
+justify-content: flex-end;
+list-style-type: none;
+}
+li.selected{
+color: red;
+font-size: 20px;
+}
+.temporary{
+width: auto;
+background-color: white;
+}
+.pagination{
+width:180px;
+margin: 0px auto;
+margin-bottom:40px;
+font-size: 22px;
+}
+.pagination .current{
+color: red;
+font-size: 25px;
+margin-right: 10px;
+}
+.pagination a{
+margin-right: 10px;
+}
+.blog-cards{
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	row-gap: 20px;
+	margin-bottom: 50px;
+}
+.blog-card-page{
+	width: 350px;
+	height: auto;
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	box-shadow:0 0 15px 4px rgba(0,0,0,0.08);
+}
+.blog-title-page{
+  	text-align: center;
+  	font-size: 18px;
+  	font-weight: bold;
+}
+.blog-date-page{margin-left: 10px;
+margin-bottom 0px;
+padding 0px;
+}
+.wanna_be {
+width: 700px;
+text-align: center;
+margin: 0px auto;
+margin-bottom: 30px;
+background-color: white;
+}
+.wanna_be a, p{
+font-size: 20px;
+font-weight: 700;
+}
+.wanna_be  span {
+color: black;
+font-size: 25px;
+}
+.cats-list a{
+text-decoration: none;
+font-weight: 600;
+color: #2d2c65;
+}
+.cats-list a:hover {
+color: red;
+}
+.category_list .cats-list{
+max-width: 1440px;
+margin:0 auto;
+margin-top: 20px;
+display: flex;
+justify-content: flex-start;
+list-style-type: none;
+font-size: 25px;
+}

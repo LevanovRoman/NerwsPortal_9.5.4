@@ -1,0 +1,18 @@
+{% extends 'mainapp/show-all-posts.html' %}
+
+{% block category %}
+
+<hr>
+<p> {{ title }} </p>
+<hr>
+
+{% if user.username in cat_list %}
+    <p>Вы подписаны на новости в категории {{ cat_name }}</p>
+{% else %}
+    <form action="{% url 'subscr' slug=cat %}" method="get">
+
+        <button type="submit">Подписаться на новости категории {{ cat_name }}</button>
+    </form>
+{% endif %}
+
+{% endblock %}

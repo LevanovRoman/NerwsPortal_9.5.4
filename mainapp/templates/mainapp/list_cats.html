@@ -1,0 +1,8 @@
+{% if cats %}
+    <p>Категории:</p>
+    <ul class="cats-list">
+        {% for c in cats %}
+        <li><a href="{{ c.get_absolute_url }}">{{c.name}}</a></li>
+        {% endfor %}
+    </ul>
+{% endif %}
