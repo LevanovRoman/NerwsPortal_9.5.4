@@ -5,34 +5,22 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.conf import settings
 
-from .models import Post
+from .models import Post, PostCategory
+from .tasks import mailing_task
 
 
-@receiver(m2m_changed, sender=Post.category.through)
-def notify_create_post(sender, instance, **kwargs):
-    all_cat = instance.category.all()
-    subs_list = [cat.subscribers.all() for cat in all_cat]
-    mail_set = set()
-    for cat in subs_list:
-        for sub in cat:
-            mail_set.add(sub.email)
-    subject = f'{instance.category} {instance.title}'
-    html_content = render_to_string(
-        'mainapp/message_create_post.html',
-        {
-            'title': instance.title,
-            'text': instance.text,
-            'link': f'{settings.ALLOWED_HOSTS[1]}/news/{instance.slug}/',
-        }
-    )
-    msg = EmailMultiAlternatives(
-        subject=subject,
-        body=instance.title,
-        from_email=settings.EMAIL_HOST_USER,
-        to=mail_set,
-    )
-    msg.attach_alternative(html_content, "text/html")
-    msg.send()
+@receiver(m2m_changed, sender=PostCategory)
+def notify_create_post(sender, instance, action, **kwargs):
+    if action == "post_add":
+        all_cat = instance.category.all()
+        subs_list = [cat.subscribers.all() for cat in all_cat]
+        mail_set = set()
+        for cat in subs_list:
+            for sub in cat:
+                mail_set.add(sub.email)
+
+        mailing_task.delay(instance.title, list(mail_set),
+                           instance.text, instance.slug)
 
 
 @receiver(user_signed_up)
@@ -51,4 +39,3 @@ def welcome_new_user(sender, **kwargs):
     )
     msg.attach_alternative(html_content, "text/html")
     msg.send()
-

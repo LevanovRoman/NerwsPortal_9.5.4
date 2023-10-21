@@ -8,6 +8,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .forms import *
 from .models import *
 from .filters import PostFilter
+from .tasks import *
 
 from datetime import date
 
@@ -242,3 +243,4 @@ def get_author(request):
 
 
 # send_mail('Тема', 'Тело письма', settings.EMAIL_HOST_USER, ['roman197t@gmail.com'])
+# hello.delay()
