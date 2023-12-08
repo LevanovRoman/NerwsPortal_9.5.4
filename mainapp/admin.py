@@ -5,9 +5,11 @@ from .models import *
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ('id', 'author', 'get_category_list', 'type', 'time_created', 'title', 'slug', 'rating')
+    list_filter = ('author', 'type', 'rating')
     list_display_links = ('id', 'author')
     prepopulated_fields = {"slug": ("title",)}
     filter_vertical = ('category',)
+    search_fields = ('author', 'type')
 
 
 class CategoryAdmin(admin.ModelAdmin):

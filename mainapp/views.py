@@ -18,7 +18,7 @@ menu = [
     {'title': 'Статьи', 'url_name': 'show_all_articles'},
 ]
 
-COUNT = 30
+COUNT = 3000
 
 
 class MainPage(ListView):
